@@ -16,9 +16,9 @@ For ESP32 UWB or ESP32 UWB Pro
 #define PIN_RST 27
 #define PIN_IRQ 34
 
-const char *ssid = "Makerfabs";
-const char *password = "20160704";
-const char *host = "192.168.1.103";
+const char *ssid = "Klllllll";
+const char *password = "27589858";
+const char *host = "192.168.50.85";
 WiFiClient client;
 
 struct MyLink *uwb_data;
@@ -71,16 +71,25 @@ void loop()
     DW1000Ranging.loop();
     if ((millis() - runtime) > 1000)
     {
+      if (client.connected())
+      {
         make_link_json(uwb_data, &all_json);
-        send_udp(&all_json);
+        //send_udp(&all_json);
+        client.print(all_json);
         runtime = millis();
+      }else
+      {
+        Serial.println("Connecting to host.");
+        delay(3000);
+        client.connect(host, 80);
+        }
     }
 }
 
 void newRange()
 {
     char c[30];
-
+/*
     Serial.print("from: ");
     Serial.print(DW1000Ranging.getDistantDevice()->getShortAddress(), HEX);
     Serial.print("\t Range: ");
@@ -89,6 +98,7 @@ void newRange()
     Serial.print("\t RX power: ");
     Serial.print(DW1000Ranging.getDistantDevice()->getRXPower());
     Serial.println(" dBm");
+    */
     fresh_link(uwb_data, DW1000Ranging.getDistantDevice()->getShortAddress(), DW1000Ranging.getDistantDevice()->getRange(), DW1000Ranging.getDistantDevice()->getRXPower());
 }
 

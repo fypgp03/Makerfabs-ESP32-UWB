@@ -7,7 +7,7 @@ For ESP32 UWB or ESP32 UWB Pro
 #include <SPI.h>
 #include "DW1000Ranging.h"
 
-#define ANCHOR_ADD "86:17:5B:D5:A9:9A:E2:9C"
+#define ANCHOR_ADD "49:03:5B:D5:A9:9A:E2:9C"
 
 #define SPI_SCK 18
 #define SPI_MISO 19
@@ -17,7 +17,7 @@ For ESP32 UWB or ESP32 UWB Pro
 // connection pins
 const uint8_t PIN_RST = 27; // reset pin
 const uint8_t PIN_IRQ = 34; // irq pin
-const uint8_t PIN_SS = 21;   // spi select pin
+const uint8_t PIN_SS = 4;   // spi select pin
 
 void setup()
 {
